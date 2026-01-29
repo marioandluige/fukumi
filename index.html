@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minimalist Life - 自然であたらしい暮らし</title>
+    <!-- Google Fonts: Noto Sans JP & Noto Serif JP -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400&family=Noto+Serif+JP:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #333;
+            --bg-color: #ffffff;
+            --accent-color: #f9f9f9;
+            --text-muted: #666;
+            --transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            --border-radius: 16px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--primary-color);
+            line-height: 1.8;
+            letter-spacing: 0.05em;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Noto Serif JP', serif;
+            font-weight: 300;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
+        }
+
+        .logo {
+            font-size: 1.1rem;
+            letter-spacing: 0.2em;
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: 400;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: clamp(15px, 3vw, 40px);
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--primary-color);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 80px 15px 15px;
+            min-height: 95vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .hero-inner {
+            height: 80vh;
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background-image: linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.15)), url('images/top.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 0 20px;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(1.6rem, 5vw, 3.2rem);
+            margin-bottom: 20px;
+            line-height: 1.4;
+            color: white;
+        }
+
+        .hero-content span {
+            display: block;
+            font-size: 0.7rem;
+            letter-spacing: 0.5em;
+            margin-bottom: 15px;
+        }
+
+        .hero-content p {
+            font-size: 0.9rem;
+        }
+
+        /* Sections */
+        section {
+            padding: 100px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: clamp(40px, 8vw, 80px);
+        }
+
+        .section-title h2 {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            margin-bottom: 15px;
+        }
+
+        .section-title span {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+        }
+
+        /* About Section */
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: clamp(40px, 6vw, 80px);
+            align-items: center;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            border-radius: var(--border-radius);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.06);
+            display: block;
+        }
+
+        /* Products Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 40px 30px;
+        }
+
+        .product-item {
+            text-align: left;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .product-image {
+            background-color: var(--accent-color);
+            aspect-ratio: 1/1;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border-radius: var(--border-radius);
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .product-item:hover .product-image img {
+            transform: scale(1.1);
+        }
+
+        .product-info h4 {
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+            font-weight: 400;
+        }
+
+        .product-info p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* Footer */
+        footer {
+            padding: 80px 5%;
+            background-color: var(--accent-color);
+            text-align: center;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        .footer-links {
+            margin-bottom: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px 40px;
+        }
+
+        .footer-links a {
+            text-decoration: none;
+            color: var(--primary-color);
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 768px) {
+            nav {
+                padding: 15px 20px;
+            }
+            
+            .nav-links {
+                gap: 20px;
+            }
+
+            .hero-inner {
+                height: 70vh;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-image {
+                order: -1; /* 画像を先に表示 */
+            }
+
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-links {
+                display: none; /* 極小サイズではナビ非表示 */
+            }
+
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-content h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#" class="logo">MINIMALIST LIFE</a>
+        <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#products">Products</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-inner">
+            <div class="hero-content">
+                <span>NEW STANDARD</span>
+                <h1>心地よい暮らし、<br>はじまる。</h1>
+                <p>Simple & Sustainable Living</p>
+            </div>
+        </div>
+    </header>
+
+    <section id="about">
+        <div class="about-grid">
+            <div class="about-image">
+                <img src="images/01.jpg" alt="About Image">
+            </div>
+            <div class="about-text">
+                <div class="section-title" style="text-align: left; margin-bottom: 30px;">
+                    <span>PHILOSOPHY</span>
+                    <h2>シンプルであること</h2>
+                </div>
+                <p>
+                    私たちは、本当に必要なものだけを選ぶ暮らしを提案します。洗練されたデザインと機能性を兼ね備えたプロダクトで、日常に小さな幸せを届けます。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="products">
+        <div class="section-title">
+            <span>LINE UP</span>
+            <h2>プロダクト</h2>
+        </div>
+        <div class="product-grid">
+            <div class="product-item">
+                <div class="product-image">
+                    <img src="images/01.jpg" alt="Ceramic Plate">
+                </div>
+                <div class="product-info">
+                    <h4>Ceramic Plate</h4>
+                    <p>¥3,200</p>
+                </div>
+            </div>
+            <div class="product-item">
+                <div class="product-image">
+                    <img src="images/02.jpg" alt="Wooden Cup">
+                </div>
+                <div class="product-info">
+                    <h4>Wooden Cup</h4>
+                    <p>¥2,400</p>
+                </div>
+            </div>
+            <div class="product-item">
+                <div class="product-image">
+                    <img src="images/03.jpg" alt="Minimal Cutlery">
+                </div>
+                <div class="product-info">
+                    <h4>Minimal Cutlery</h4>
+                    <p>¥1,200</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-links">
+            <a href="#about">About</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <p>&copy; 2024 Minimalist Life. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
